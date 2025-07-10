@@ -1,6 +1,8 @@
 package com.isekai.security.controllers;
 
+import com.isekai.security.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +18,10 @@ public class HelloController {
     @GetMapping("/secured")
     public String secured(){
         return "Si ves esto estas bien logeado!!";
+    }
+
+    @GetMapping("/admin")
+    public String admin(@AuthenticationPrincipal UserPrincipal principal){
+        return "Si ves esto eres un administrador. User ID: "+ principal.getUserId();
     }
 }
